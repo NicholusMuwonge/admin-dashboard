@@ -10,17 +10,17 @@ import Paper from "@mui/material/Paper";
 import { Skeleton, TableHead } from "@mui/material";
 import TablePaginationActionsContainer from "./TablePaginationActionsContainer";
 import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
+const loadingFillers = new Array(7).fill({
+  id: "",
+  name: "",
+  username: "",
+  email: "",
+  city: "",
+});
 const TableDetails = ({ rowsPerPage, page, emptyRows, rows }) => {
-  const loadingFillers = new Array(7).fill({
-    id: "",
-    name: "",
-    username: "",
-    email: "",
-    city: "",
-  });
-
   const loading = useSelector((state) => state.allUsers.loading);
+  const navigate = useNavigate();
   return (
     <>
       {loading ? (
@@ -54,7 +54,7 @@ const TableDetails = ({ rowsPerPage, page, emptyRows, rows }) => {
                 {row.city}
               </TableCell>
               <TableCell style={styles.tableCellStyle} align="right">
-                <button style={styles.editButtonStyle} title="Edit user">
+                <button style={styles.editButtonStyle} title="Edit user" onClick={()=>navigate(`user/${row.id}`)}>
                   Edit User
                 </button>
               </TableCell>

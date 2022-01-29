@@ -19,7 +19,9 @@ const getAllUsersReducer = (state = initialUserState, action) => {
         ...state,
         loading: action.loading,
       };
-    case USERS_FETCH_SUCCESS: case EDIT_USER:
+    case USERS_FETCH_SUCCESS:
+    case EDIT_USER:
+    case CREATE_NEW_USER:
       return {
         loading: false,
         users: action.users,
@@ -30,12 +32,6 @@ const getAllUsersReducer = (state = initialUserState, action) => {
         loading: false,
         users: [],
         error: action.error,
-      };
-    case CREATE_NEW_USER:
-      return {
-        loading: false,
-        users: [...state.users, action.user],
-        error: "",
       };
     default:
       return state;

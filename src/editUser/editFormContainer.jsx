@@ -25,7 +25,7 @@ export default function EditUsersContainer() {
   };
 
   React.useEffect(() => {
-    if (parseInt(userId) && parseInt(userId) < allUsers.length) {
+    if (parseInt(userId)) {
       let userRecord =
         allUsers.length &&
         allUsers.filter((user) => user.id === parseInt(userId));
@@ -56,10 +56,18 @@ export default function EditUsersContainer() {
     setState({});
     navigate("/");
   };
-  const formProps= {errors, handleChange, handleSubmit, email, name, city, username};
+  const formProps = {
+    errors,
+    handleChange,
+    handleSubmit,
+    email,
+    name,
+    city,
+    username,
+  };
   return (
     <>
-      <UserForm {...formProps}/>
+      <UserForm {...formProps} />
     </>
   );
 }

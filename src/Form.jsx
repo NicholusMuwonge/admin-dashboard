@@ -1,7 +1,7 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import { Paper } from "@material-ui/core";
-import { Button, Divider } from "@mui/material";
+import { Alert, Button, Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 export const formStyles = {
   container: { padding: "1%" },
@@ -60,12 +60,15 @@ export default function UserForm({
   name,
   city,
   username,
+  emailTaken,
+  emailTakenPrompt,
 }) {
   const navigate = useNavigate();
   return (
     <>
       <Paper style={formStyles.container}>
         <h3 style={formStyles.tableNameStyle}>Form</h3>
+        {emailTaken ? <Alert severity="error">{emailTakenPrompt}</Alert> : null}
         <Divider style={formStyles.dividerStyling} />
         <Paper
           component="form"
@@ -171,7 +174,8 @@ export default function UserForm({
                 errors["email"]["error"] ||
                 errors["name"]["error"] ||
                 errors["city"]["error"] ||
-                errors["username"]["error"]
+                errors["username"]["error"] ||
+                emailTaken
               }
             >
               Submit

@@ -4,14 +4,12 @@ import {
   Route,
   Routes as Switch,
 } from "react-router-dom";
-import { useBeforeunload } from 'react-beforeunload';
 import "./App.css";
 import GetUsersContainer from "./getUsers/GetUsersContainer";
 import EditUsersContainer from "./editUser/editFormContainer";
 import AddUsersContainer from "./addUser/AddUserContainer";
 
 function App() {
-  useBeforeunload(()=>localStorage.removeItem('persist:root'));
   return (
     <div className="App">
       <Router>
@@ -22,7 +20,7 @@ function App() {
           <Route path="/" element={<GetUsersContainer />} />
           <Route path="/user/:userId" element={<EditUsersContainer/>} />
           <Route path="/user/new" element={<AddUsersContainer/>} />
-          <Route path="*" element={<>Not Found</>} />
+          <Route path="*" element={<><b>404</b> | Not Found</>} />
         </Switch>
       </Router>
     </div>

@@ -4,6 +4,7 @@ import {
   USERS_FETCH_SUCCESS,
   USERS_FETCH_UNSUCCESSFUL,
   USERS_LOADING,
+  DELETE_USER,
 } from "../constants";
 
 let initialUserState = {
@@ -22,6 +23,7 @@ const getAllUsersReducer = (state = initialUserState, action) => {
     case USERS_FETCH_SUCCESS:
     case EDIT_USER:
     case CREATE_NEW_USER:
+    case DELETE_USER:
       return {
         loading: false,
         users: action.users,

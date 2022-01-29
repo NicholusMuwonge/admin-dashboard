@@ -3,7 +3,7 @@ import { cityRegex, emailRegex, nameRegex, usernameRegex } from "./constants";
 
 let emailPrompt =
   "Email is required. Please type a proper email ie username@gmail.com";
-let namePrompt = "Name is required. Please type a proper name";
+let namePrompt = "Name is required. Please type a proper name ie Nicholus Muwonge.";
 let usernamePrompt = "Username should countain letter and or a . or an _.";
 let cityPrompt =
   "City should countain letters and alphabets and some special characters.";

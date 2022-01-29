@@ -174,8 +174,7 @@ export default function UserForm({
                 errors["email"]["error"] ||
                 errors["name"]["error"] ||
                 errors["city"]["error"] ||
-                errors["username"]["error"] ||
-                emailTaken
+                errors["username"]["error"]
               }
             >
               Submit

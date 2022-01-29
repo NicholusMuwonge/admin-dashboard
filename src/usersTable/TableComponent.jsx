@@ -7,59 +7,65 @@ import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Skeleton, TableHead } from "@mui/material";
+import { TableHead } from "@mui/material";
 import TablePaginationActionsContainer from "./TablePaginationActionsContainer";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const loadingFillers = new Array(7).fill({
-  id: "",
-  name: "",
-  username: "",
-  email: "",
-  city: "",
-});
-const TableDetails = ({ rowsPerPage, page, emptyRows, rows }) => {
+import TableLoader from "./TableLoader";
+const TableDetails = ({
+  rowsPerPage,
+  page,
+  emptyRows,
+  rows,
+  setDeleteId,
+  setOpenDeletePrompt,
+}) => {
   const loading = useSelector((state) => state.allUsers.loading);
   const navigate = useNavigate();
   return (
     <>
       {loading ? (
-        <TableBody>
-          {loadingFillers.map((placeholder, key) => (
-            <TableCell key={key} style={styles.tableCellStyle} align="right">
-              <Skeleton variant="text" />
-            </TableCell>
-          ))}
-        </TableBody>
+        <TableLoader />
       ) : (
         <TableBody>
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
-          ).map((row) => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.id}
+          ).map((row, key) => (
+            <TableRow key={row?.id ?? key}>
+              <TableCell scope="row" align="center">
+                {row?.id}
               </TableCell>
-              <TableCell style={styles.tableCellStyle} align="right">
-                {row.name}
+              <TableCell style={styles.tableCellStyle} align="center">
+                {row?.name}
               </TableCell>
-              <TableCell style={styles.tableCellStyle} align="right">
-                {row.username}
+              <TableCell style={styles.tableCellStyle} align="center">
+                {row?.username}
               </TableCell>
-              <TableCell style={styles.tableCellStyle} align="right">
-                {row.email}
+              <TableCell style={styles.tableCellStyle} align="center">
+                {row?.email}
               </TableCell>
-              <TableCell style={styles.tableCellStyle} align="right">
-                {row.city}
+              <TableCell style={styles.tableCellStyle} align="center">
+                {row?.city}
               </TableCell>
-              <TableCell style={styles.tableCellStyle} align="right">
-                <button style={styles.editButtonStyle} title="Edit user" onClick={()=>navigate(`user/${row.id}`)}>
+              <TableCell style={styles.tableCellStyle} align="center">
+                <button
+                  style={styles.editButtonStyle}
+                  title="Edit user"
+                  onClick={() => navigate(`user/${row.id}`)}
+                >
                   Edit User
                 </button>
               </TableCell>
-              <TableCell style={styles.tableCellStyle} align="right">
-                <button style={styles.deleteButtonStyle} title="Delete user">
+              <TableCell style={styles.tableCellStyle} align="center">
+                <button
+                  style={styles.deleteButtonStyle}
+                  title="Delete user"
+                  onClick={() => {
+                    setDeleteId(row.id);
+                    setOpenDeletePrompt(true);
+                  }}
+                >
                   Delete User
                 </button>
               </TableCell>
@@ -83,31 +89,42 @@ export default function UsersTableComponent({
   handleChangeRowsPerPage,
   rowsPerPage,
   page,
+  setDeleteId,
+  setOpenDeletePrompt,
 }) {
-  let detailsProps = { rowsPerPage, page, emptyRows, rows };
+  let detailsProps = {
+    rowsPerPage,
+    page,
+    emptyRows,
+    rows,
+    setDeleteId,
+    setOpenDeletePrompt,
+  };
   return (
     <Paper>
       <TableContainer component={Paper}>
         <Table sx={styles.userTable} aria-label="users table">
           <TableHead>
             <TableRow style={styles.tableRow}>
-              <TableCell style={styles.tableHeaderStyle}>Id</TableCell>
-              <TableCell align="right" style={styles.tableHeaderStyle}>
+              <TableCell align="center" style={styles.tableHeaderStyle}>
+                Id
+              </TableCell>
+              <TableCell align="center" style={styles.tableHeaderStyle}>
                 Name
               </TableCell>
-              <TableCell align="right" style={styles.tableHeaderStyle}>
+              <TableCell align="center" style={styles.tableHeaderStyle}>
                 Username
               </TableCell>
-              <TableCell align="right" style={styles.tableHeaderStyle}>
+              <TableCell align="center" style={styles.tableHeaderStyle}>
                 Email
               </TableCell>
-              <TableCell align="right" style={styles.tableHeaderStyle}>
+              <TableCell align="center" style={styles.tableHeaderStyle}>
                 City
               </TableCell>
-              <TableCell align="right" style={styles.tableHeaderStyle}>
+              <TableCell align="center" style={styles.tableHeaderStyle}>
                 Edit
               </TableCell>
-              <TableCell align="right" style={styles.tableHeaderStyle}>
+              <TableCell align="center" style={styles.tableHeaderStyle}>
                 Delete
               </TableCell>
             </TableRow>

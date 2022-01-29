@@ -1,6 +1,7 @@
 import UsersTableContainer from "../usersTable/TableContainer";
 import { Paper } from "@material-ui/core";
 import { Divider } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 export const getUsersStyles = {
   container: { padding: "1%" },
   toolBarContainer: { flexDirection: "row", display: "flex" },
@@ -26,6 +27,7 @@ export const getUsersStyles = {
   dividerStyling: { marginTop: "2%", marginBottom: "2%" },
 };
 const GetUsers = ({ usersCentralState }) => {
+  const navigate = useNavigate();
   return (
     <>
       <Paper style={getUsersStyles.container}>
@@ -34,7 +36,12 @@ const GetUsers = ({ usersCentralState }) => {
             <h3 style={getUsersStyles.tableNameStyle}>User List</h3>
           </div>
           <div style={getUsersStyles.newUserButtonContainer}>
-            <button style={getUsersStyles.buttonStyling}>New User</button>
+            <button
+              style={getUsersStyles.buttonStyling}
+              onClick={() => navigate("/user/new")}
+            >
+              New User
+            </button>
           </div>
         </div>
         <Divider style={getUsersStyles.dividerStyling} />

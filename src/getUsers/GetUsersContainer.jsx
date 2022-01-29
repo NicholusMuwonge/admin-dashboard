@@ -7,8 +7,8 @@ const GetUsersContainer = () => {
   const dispatch = useDispatch();
   const usersCentralState = useSelector((state) => state.allUsers);
   useEffect(() => {
-    dispatch(fetchAllUsers());
-  }, [dispatch]);
+    !usersCentralState.users.length && dispatch(fetchAllUsers());
+  }, [dispatch, usersCentralState.users]);
   const childProps = { usersCentralState };
   return <GetUsers {...childProps} />;
 };

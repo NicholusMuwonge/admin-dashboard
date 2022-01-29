@@ -4,15 +4,15 @@ import {
   USERS_FETCH_UNSUCCESSFUL,
 } from "../constants";
 
-const handleUserLoading = (loadingState) => ({
+export const handleUserLoading = (loadingState) => ({
   type: USERS_LOADING,
   loading: loadingState,
 });
-const handleSuccessfullUsersFetch = (users) => ({
+export const handleSuccessfullUsersFetch = (users) => ({
   type: USERS_FETCH_SUCCESS,
   users,
 });
-const handleUnsuccessfullUsersFetch = (error) => ({
+export const handleUnsuccessfullUsersFetch = (error) => ({
   type: USERS_FETCH_UNSUCCESSFUL,
   error,
 });

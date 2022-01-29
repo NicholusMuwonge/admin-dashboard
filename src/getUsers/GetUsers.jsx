@@ -1,7 +1,7 @@
 import UsersTableContainer from "../usersTable/TableContainer";
 import { Paper } from "@material-ui/core";
 import { Divider } from "@mui/material";
-const getUsersStyles = {
+export const getUsersStyles = {
   container: { padding: "1%" },
   toolBarContainer: { flexDirection: "row", display: "flex" },
   tableNameContainer: { flex: 1, display: "flex", alignItems: "center" },
